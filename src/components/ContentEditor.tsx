@@ -1,4 +1,4 @@
-// import JoditEditor from "jodit-react";
+import JoditEditor from "jodit-react";
 import { useTheme } from "next-themes";
 import { useMemo, useRef } from "react";
 
@@ -29,14 +29,13 @@ const ContentEditor = ({ value, onChange }: ContentEditorProps) => {
   );
 
   return (
-    // <JoditEditor
-    //   ref={editor}
-    //   value={value}
-    //   config={config}
-    //   onBlur={(newContent) => onChange(newContent)}
-    //   onChange={() => {}}
-    // />
-    <></>
+    <JoditEditor
+      ref={editor}
+      value={value}
+      config={config}
+      onBlur={(newContent) => onChange(newContent)}
+      onChange={() => {}}
+    />
   );
 };
 
