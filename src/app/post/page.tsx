@@ -16,16 +16,17 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { formSchema, formSchemaType } from "@/utils/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ImageUp, Loader2, X } from "lucide-react";
+import { ImageUp, X } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
+const isBrowser = typeof window !== undefined; // check if component is rendered in a browser
+
 const PostStory = () => {
   const [tags, setTags] = useState<string[]>([]);
-  const [isMount, setIsMount] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
-
   const form = useForm<formSchemaType>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -67,18 +68,6 @@ const PostStory = () => {
   const onSubmit = (values: formSchemaType) => {
     console.log("Form submitted with values:", values);
   };
-
-  useEffect(() => {
-    setIsMount(true);
-  }, []);
-
-  if (!isMount) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <Loader2 className="animate-spin" />
-      </div>
-    );
-  }
 
   return (
     <section className="flex items-center justify-center min-h-screen">
